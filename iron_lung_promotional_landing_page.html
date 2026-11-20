@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IRON LUNG | Official Theatrical Promotional Site</title>
+
+  <!-- Google Fonts: Oswald (Condensed Industrial Display), Inter (Editorial Sans), Share Tech Mono (Submarine Telemetry) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Oswald:wght@400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN for Responsive Utility Styling -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Custom Atmospheric & Industrial Horror Styling -->
+  <style>
+    :root {
+      --abyss-black: #070709;
+      --rusted-steel: #15171a;
+      --blood-crimson: #8a0303;
+      --alert-red: #d90429;
+      --amber-terminal: #d49a42;
+      --bone-white: #e6e6e6;
+    }
+
+    body {
+      background-color: var(--abyss-black);
+      color: var(--bone-white);
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+    }
+
+    .font-display {
+      font-family: 'Oswald', sans-serif;
+    }
+
+    .font-mono-tech {
+      font-family: 'Share Tech Mono', monospace;
+    }
+
+    /* Subtle CRT Monitor Scanlines Overlay (Non-interactive) */
+    .crt-scanlines {
+      background: linear-gradient(
+        rgba(18, 16, 16, 0) 50%,
+        rgba(0, 0, 0, 0.35) 50%
+      ),
+      linear-gradient(
+        90deg,
+        rgba(255, 0, 0, 0.03),
+        rgba(0, 255, 0, 0.01),
+        rgba(0, 0, 255, 0.03)
+      );
+      background-size: 100% 3px, 6px 100%;
+    }
+
+    /* Submarine Radar / Sonar Grid Background for Image Placeholders */
+    .sonar-grid {
+      background-color: #0b0c0e;
+      background-image:
+        radial-gradient(circle at center, rgba(138, 3, 3, 0.22) 0%, rgba(7, 7, 9, 0.95) 75%),
+        linear-gradient(to right, rgba(212, 154, 66, 0.07) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(212, 154, 66, 0.07) 1px, transparent 1px);
+      background-size: 100% 100%, 28px 28px, 28px 28px;
+    }
+
+    /* Rusted Steel Surface Texture */
+    .steel-panel {
+      background: linear-gradient(145deg, #181a1e 0%, #101215 100%);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 20px 40px rgba(0, 0, 0, 0.75);
+    }
+
+    /* Industrial Hazard Stripe Accent */
+    .hazard-stripe {
+      background: repeating-linear-gradient(
+        -45deg,
+        #d49a42,
+        #d49a42 8px,
+        #15171a 8px,
+        #15171a 16px
+      );
+    }
+
+    /* Glowing Crimson Title Effect */
+    .title-glow {
+      text-shadow: 0 0 35px rgba(217, 4, 41, 0.45), 0 4px 12px rgba(0, 0, 0, 0.95);
+    }
+
+    /* Subtle Pulse for Status Indicators */
+    @keyframes sonarBlink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.35; }
+    }
+
+    .animate-sonar {
+      animation: sonarBlink 2.4s infinite ease-in-out;
+    }
+
+    /* Hollywood Condensed Billing Block Styling */
+    .billing-block {
+      font-family: 'Oswald', sans-serif;
+      letter-spacing: 0.04em;
+      line-height: 1.25;
+      text-transform: uppercase;
+    }
+    /* Images inside the viewfinder frames: photo fills the frame, HUD stays on top */
+    .media-frame { overflow: hidden; }
+    .media-frame > .media-img {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      object-fit: cover; z-index: 0;
+    }
+    .media-frame::after {
+      content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+      background: linear-gradient(to bottom, rgba(7,7,9,0.75) 0%, rgba(7,7,9,0) 22%, rgba(7,7,9,0) 75%, rgba(7,7,9,0.85) 100%);
+    }
+    .media-frame > :not(.media-img) { z-index: 2; text-shadow: 0 1px 3px rgba(0,0,0,0.9); }
+  </style>
+</head>
+<body class="antialiased selection:bg-[#8a0303] selection:text-white">
+
+  <!-- Subtle CRT Scanline Screen Filter (Visual Atmosphere Only) -->
+  <div class="crt-scanlines pointer-events-none fixed inset-0 z-50 opacity-55"></div>
+
+  <!-- ===================================================================== -->
+  <!-- 1. TOP NAVIGATION BAR                                                 -->
+  <!-- ===================================================================== -->
+  <header class="sticky top-0 z-40 border-b border-[#8a0303]/40 bg-[#070709]/95 backdrop-blur-md">
+    <div class="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4 px-4 py-3.5 sm:px-6 lg:px-8">
+      
+      <!-- Brand / Movie Logo -->
+      <a href="#top" class="group flex items-center gap-3">
+        <span class="inline-block h-2.5 w-2.5 rounded-full bg-[#d90429] shadow-[0_0_10px_#d90429] animate-sonar"></span>
+        <span class="font-display text-2xl font-bold tracking-[0.22em] text-[#e6e6e6] transition-colors group-hover:text-[#d90429] sm:text-3xl">
+          IRON LUNG
+        </span>
+      </a>
+
+      <!-- Anchor Navigation Links -->
+      <nav aria-label="Primary Navigation" class="order-3 flex w-full flex-wrap items-center justify-center gap-x-5 gap-y-2 border-t border-white/10 pt-2.5 text-xs font-medium tracking-[0.18em] text-[#e6e6e6]/80 md:order-2 md:w-auto md:border-none md:pt-0 lg:gap-x-8">
+        <a href="#story" class="transition-colors hover:text-[#d49a42]">THE STORY</a>
+        <a href="#submarine" class="transition-colors hover:text-[#d49a42]">THE SUBMARINE</a>
+        <a href="#game" class="transition-colors hover:text-[#d49a42]">THE VIDEO GAME</a>
+        <a href="#cast" class="transition-colors hover:text-[#d49a42]">CAST &amp; CREW</a>
+        <a href="#gallery" class="transition-colors hover:text-[#d49a42]">GALLERY</a>
+      </nav>
+
+      <!-- Static Theatrical Release Badge -->
+      <div class="order-2 md:order-3">
+        <span class="font-mono-tech inline-flex items-center gap-2 rounded border border-[#d90429]/70 bg-[#8a0303]/25 px-3 py-1.5 text-[11px] font-semibold tracking-[0.16em] text-[#e6e6e6] shadow-[0_0_15px_rgba(138,3,3,0.35)]">
+          <span class="h-1.5 w-1.5 rounded-full bg-[#d49a42]"></span>
+          COMING TO THEATERS
+        </span>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- ===================================================================== -->
+    <!-- 2. HERO SECTION                                                       -->
+    <!-- ===================================================================== -->
+    <section class="relative overflow-hidden border-b border-[#8a0303]/40 bg-[radial-gradient(ellipse_at_top,_#2b0408_0%,_#070709_68%)] py-14 sm:py-20 lg:py-24">
+      <!-- Ambient Sonar Depth Coordinates -->
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="mb-6 flex flex-wrap items-center justify-between gap-2 border-b border-white/10 pb-3 font-mono-tech text-xs tracking-[0.2em] text-[#d49a42]/90">
+          <span>SECTOR: AT-5 // BLOOD OCEAN EXPEDITION</span>
+          <span>DEPTH: -1,140M // OXYGEN: CRITICAL</span>
+        </div>
+
+        <div class="grid grid-cols-1 items-center gap-10 lg:grid-cols-12 lg:gap-12">
+          
+          <!-- Left Column: Dramatic Typography & Static CTA Buttons -->
+          <div class="lg:col-span-6">
+            <p class="font-mono-tech mb-3 inline-block rounded border border-[#d49a42]/40 bg-[#15171a] px-3 py-1 text-xs uppercase tracking-[0.25em] text-[#d49a42]">
+              A Feature Film Event
+            </p>
+
+            <h1 class="font-display title-glow text-6xl font-bold uppercase tracking-[0.12em] text-[#e6e6e6] sm:text-7xl lg:text-8xl">
+              IRON LUNG
+            </h1>
+
+            <p class="font-display mt-4 text-xl font-semibold uppercase tracking-[0.16em] text-[#d90429] sm:text-2xl">
+              NO WINDOWS. NO ESCAPE. AN OCEAN OF BLOOD.
+            </p>
+
+            <p class="mt-4 max-w-xl text-sm leading-relaxed text-[#e6e6e6]/80 sm:text-base">
+              Written &amp; Directed by <strong class="font-semibold text-white">Mark Fischbach</strong> &bull; Based on the Cult Horror Game by <strong class="font-semibold text-white">David Szymanski</strong>
+            </p>
+
+            <p class="mt-5 max-w-xl text-sm leading-relaxed text-[#e6e6e6]/70">
+              In a dying universe stripped of stars, one convict is welded inside a corroded midget submarine and lowered into an uncharted sea of human blood—blind to whatever hunts in the dark.
+            </p>
+
+            <!-- Static Promotional Action Buttons -->
+            <div class="mt-8 flex flex-wrap items-center gap-4">
+              <a href="#gallery" class="font-display inline-flex items-center justify-center gap-3 rounded bg-[#d90429] px-7 py-3.5 text-base font-semibold uppercase tracking-[0.18em] text-white shadow-[0_0_25px_rgba(217,4,41,0.5)] transition-all hover:bg-[#8a0303]">
+                <!-- Static Play Triangle SVG -->
+                <svg class="h-4 w-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M8 5v14l11-7z" />
+                </svg>
+                WATCH TEASER TRAILER
+              </a>
+
+              <a href="#story" class="font-display inline-flex items-center justify-center rounded border border-[#d49a42]/60 bg-[#15171a]/90 px-7 py-3.5 text-base font-semibold uppercase tracking-[0.18em] text-[#e6e6e6] transition-all hover:border-[#d49a42] hover:bg-[#1f2227] hover:text-[#d49a42]">
+                EXPLORE THE DEPTHS
+              </a>
+            </div>
+          </div>
+
+          <!-- Right Column: Main Hero Poster / Banner Image Placeholder -->
+          <div class="lg:col-span-6">
+            <!-- INSERT OFFICIAL MOVIE POSTER OR HERO BANNER IMAGE INSIDE THIS FRAME -->
+            
+            <div class="sonar-grid media-frame relative flex min-h-[380px] flex-col justify-between rounded-lg border-2 border-[#8a0303]/70 p-6 shadow-[0_0_50px_rgba(138,3,3,0.35)] sm:min-h-[450px]">
+              <!-- IMAGEN: archivo local. Para cambiarla reemplaza "assets/hero.jpg" por tu imagen -->
+              <img class="media-img object-right" src="assets/hero.jpg" alt="Iron Lung official key art" />
+              
+              <!-- Viewfinder Corner Brackets -->
+              <span class="pointer-events-none absolute left-3 top-3 h-5 w-5 border-l-2 border-t-2 border-[#d49a42]"></span>
+              <span class="pointer-events-none absolute right-3 top-3 h-5 w-5 border-r-2 border-t-2 border-[#d49a42]"></span>
+              <span class="pointer-events-none absolute bottom-3 left-3 h-5 w-5 border-b-2 border-l-2 border-[#d49a42]"></span>
+              <span class="pointer-events-none absolute bottom-3 right-3 h-5 w-5 border-b-2 border-r-2 border-[#d49a42]"></span>
+
+              <!-- Top Camera Telemetry Header -->
+              <div class="flex items-center justify-between font-mono-tech text-xs text-[#d49a42]">
+                <span class="flex items-center gap-2">
+                  <span class="h-2 w-2 rounded-full bg-[#d90429]"></span>
+                  CAM-01 // MAIN THEATRICAL KEY ART
+                </span>
+                <span>2.39:1 ANAMORPHIC</span>
+              </div>
+
+
+              <!-- Bottom Metadata Bar -->
+              <div class="flex items-center justify-between border-t border-white/10 pt-3 font-mono-tech text-[11px] text-[#e6e6e6]/50">
+                <span>RES: 3840x2160 RAW</span>
+                <span>SUBMERSIBLE SM-13</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- 3. SYNOPSIS SECTION ('THE QUIET RAPTURE')                             -->
+    <!-- ===================================================================== -->
+    <section id="story" class="border-b border-white/10 bg-[#070709] py-20 lg:py-28">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        
+        <!-- Section Header -->
+        <div class="mb-12">
+          <p class="font-mono-tech text-xs uppercase tracking-[0.25em] text-[#d49a42]">
+            ARCHIVE LOG // 001 — SYNOPSIS
+          </p>
+          <h2 class="font-display mt-2 text-4xl font-bold uppercase tracking-[0.12em] text-[#e6e6e6] sm:text-5xl">
+            THE QUIET RAPTURE
+          </h2>
+          <div class="mt-4 h-1 w-24 bg-[#d90429]"></div>
+        </div>
+
+        <!-- Two-Column Editorial Layout -->
+        <div class="grid grid-cols-1 items-center gap-12 lg:grid-cols-12">
+          
+          <!-- Left Column: Atmospheric Synopsis -->
+          <div class="space-y-6 text-base leading-relaxed text-[#e6e6e6]/85 lg:col-span-6">
+            <p class="text-lg font-medium text-white sm:text-xl">
+              Decades ago, without warning or explanation, every star and habitable planet in the known universe vanished.
+            </p>
+            <p>
+              Known only as <span class="font-semibold text-[#d49a42]">The Quiet Rapture</span>, the cataclysm left behind an endless void of ash and drifting wreckage. The remnants of humanity now cling to survival aboard decaying, oxygen-starved space stations—scavenging dying moons for the dwindling resources required to keep the lights from going out forever.
+            </p>
+            <p>
+              On the barren, desolate moon designated <strong class="text-white">AT-5</strong>, explorers make an impossible discovery: a vast, subterranean ocean composed entirely of human blood. Beneath its crimson surface lie anomalous structures and vital minerals that could save humanity from extinction.
+            </p>
+            <p class="border-l-2 border-[#d90429] pl-4 italic text-[#e6e6e6]/90">
+              To reach the trench, a condemned convict is welded inside the <strong class="text-white">SM-13</strong>—a rusted, leaking midget submarine nicknamed the &ldquo;Iron Lung.&rdquo; With every viewport sealed shut against the crushing pressure, he must navigate blindly using proximity sensors and a single external camera... unaware that something massive is moving beneath the blood.
+            </p>
+          </div>
+
+          <!-- Right Column: Framed Movie Still Placeholder -->
+          <div class="lg:col-span-6">
+            <!-- INSERT MOVIE INTERIOR STILL INSIDE THIS FRAME -->
+            <div class="sonar-grid media-frame relative flex min-h-[340px] flex-col justify-between rounded-lg border border-[#d49a42]/40 p-6 shadow-2xl sm:min-h-[400px]">
+              <!-- IMAGEN: archivo local. Para cambiarla reemplaza "assets/char_inside.jpg" por tu imagen -->
+              <img class="media-img" src="assets/char_inside.jpg" alt="Markiplier at the controls inside the SM-13 submarine" loading="lazy" />
+              
+              <!-- Corner Brackets -->
+              <span class="pointer-events-none absolute left-3 top-3 h-4 w-4 border-l-2 border-t-2 border-[#d90429]"></span>
+              <span class="pointer-events-none absolute right-3 top-3 h-4 w-4 border-r-2 border-t-2 border-[#d90429]"></span>
+              <span class="pointer-events-none absolute bottom-3 left-3 h-4 w-4 border-b-2 border-l-2 border-[#d90429]"></span>
+              <span class="pointer-events-none absolute bottom-3 right-3 h-4 w-4 border-b-2 border-r-2 border-[#d90429]"></span>
+
+              <div class="flex items-center justify-between font-mono-tech text-xs text-[#d49a42]">
+                <span>INTERIOR FEED // COCKPIT</span>
+                <span>PRESSURE: 890 ATM</span>
+              </div>
+
+
+              <div class="flex items-center justify-between border-t border-white/10 pt-3 font-mono-tech text-[11px] text-[#e6e6e6]/50">
+                <span>AT-5 EXPEDITION ARCHIVE</span>
+                <span>STILL #02</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- 4. VESSEL DOSSIER ('SUBMERSIBLE SM-13 // TECHNICAL BRIEF')            -->
+    <!-- ===================================================================== -->
+    <section id="submarine" class="border-b border-white/10 bg-[#0b0c0f] py-20 lg:py-28">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        
+        <!-- Classified Manual Container -->
+        <div class="steel-panel overflow-hidden rounded-xl border border-[#d49a42]/35">
+          <!-- Top Hazard Bar -->
+          <div class="hazard-stripe h-2.5 w-full"></div>
+
+          <div class="p-6 sm:p-10 lg:p-12">
+            <!-- Dossier Header -->
+            <div class="flex flex-wrap items-start justify-between gap-4 border-b border-white/10 pb-6">
+              <div>
+                <span class="font-mono-tech rounded bg-[#8a0303]/30 px-2.5 py-1 text-xs uppercase tracking-[0.2em] text-[#d90429]">
+                  CLASSIFIED NAVAL MANUAL // CONSOLIDATION OF IRON
+                </span>
+                <h2 class="font-display mt-3 text-3xl font-bold uppercase tracking-[0.12em] text-[#e6e6e6] sm:text-4xl lg:text-5xl">
+                  SUBMERSIBLE SM-13 // TECHNICAL BRIEF
+                </h2>
+              </div>
+              <div class="font-mono-tech text-right text-xs text-[#d49a42]">
+                <p>CLASS: DEEP-TRENCH RECON</p>
+                <p>STATUS: WELDED SHUT</p>
+              </div>
+            </div>
+
+            <!-- Dossier Grid: Specs + Visual Diagram Placeholder -->
+            <div class="mt-8 grid grid-cols-1 gap-8 lg:grid-cols-12">
+              
+              <!-- Technical Readout Specs -->
+              <div class="space-y-4 lg:col-span-5">
+                <div class="rounded border border-white/10 bg-[#070709]/80 p-4">
+                  <p class="font-mono-tech text-xs uppercase tracking-widest text-[#d49a42]">
+                    Hull Status
+                  </p>
+                  <p class="font-display mt-1 text-xl font-semibold uppercase tracking-wider text-[#e6e6e6]">
+                    Corroded // Heavily Oxidized Iron
+                  </p>
+                </div>
+
+                <div class="rounded border border-white/10 bg-[#070709]/80 p-4">
+                  <p class="font-mono-tech text-xs uppercase tracking-widest text-[#d49a42]">
+                    Viewport Configuration
+                  </p>
+                  <p class="font-display mt-1 text-xl font-semibold uppercase tracking-wider text-[#e6e6e6]">
+                    None &mdash; External Camera Only
+                  </p>
+                </div>
+
+                <div class="rounded border border-white/10 bg-[#070709]/80 p-4">
+                  <p class="font-mono-tech text-xs uppercase tracking-widest text-[#d49a42]">
+                    Operating Environment
+                  </p>
+                  <p class="font-display mt-1 text-xl font-semibold uppercase tracking-wider text-[#e6e6e6]">
+                    Sub-surface Blood Ocean on AT-5
+                  </p>
+                </div>
+
+                <div class="rounded border border-[#d90429]/50 bg-[#8a0303]/15 p-4">
+                  <p class="font-mono-tech text-xs uppercase tracking-widest text-[#d90429]">
+                    Survival Probability
+                  </p>
+                  <p class="font-display mt-1 text-xl font-semibold uppercase tracking-wider text-[#d90429]">
+                    Negligible (&lt; 0.01%)
+                  </p>
+                </div>
+
+                <p class="font-mono-tech pt-2 text-xs leading-relaxed text-[#e6e6e6]/60">
+                  * WARNING: Entry hatch is permanently arc-welded prior to submersion. Vessel lacks emergency ballast release.
+                </p>
+              </div>
+
+              <!-- Large Exterior Concept / Blueprint Placeholder -->
+              <div class="lg:col-span-7">
+                <!-- INSERT SUBMARINE EXTERIOR RENDER OR BLUEPRINT DIAGRAM HERE -->
+                <div class="sonar-grid media-frame relative flex h-full min-h-[340px] flex-col justify-between rounded-lg border border-[#d49a42]/45 p-6">
+                  <!-- IMAGEN: archivo local. Para cambiarla reemplaza "assets/sm-13.jpg" por tu imagen -->
+                  <img class="media-img" src="assets/sm-13.jpg" alt="The SM-13 submarine descending into the blood ocean" loading="lazy" />
+                  
+                  <!-- Corner Brackets -->
+                  <span class="pointer-events-none absolute left-3 top-3 h-4 w-4 border-l-2 border-t-2 border-[#d49a42]"></span>
+                  <span class="pointer-events-none absolute right-3 top-3 h-4 w-4 border-r-2 border-t-2 border-[#d49a42]"></span>
+                  <span class="pointer-events-none absolute bottom-3 left-3 h-4 w-4 border-b-2 border-l-2 border-[#d49a42]"></span>
+                  <span class="pointer-events-none absolute bottom-3 right-3 h-4 w-4 border-b-2 border-r-2 border-[#d49a42]"></span>
+
+                  <div class="flex items-center justify-between font-mono-tech text-xs text-[#d49a42]">
+                    <span>SCHEMATIC // VESSEL PROFILE</span>
+                    <span>LENGTH: 7.4 METERS</span>
+                  </div>
+
+
+                  <div class="flex items-center justify-between border-t border-white/10 pt-3 font-mono-tech text-[11px] text-[#e6e6e6]/50">
+                    <span>FIG 3.1 &mdash; HULL INTEGRITY COMPROMISED</span>
+                    <span>COI-SM13-REV4</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- 5. ORIGINS SECTION ('FROM INDIE HORROR PHENOMENON TO THE BIG SCREEN')   -->
+    <!-- ===================================================================== -->
+    <section id="game" class="border-b border-white/10 bg-[#070709] py-20 lg:py-28">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        
+        <!-- Section Header -->
+        <div class="max-w-3xl">
+          <p class="font-mono-tech text-xs uppercase tracking-[0.25em] text-[#d49a42]">
+            SOURCE MATERIAL // 2022 CULT CLASSIC
+          </p>
+          <h2 class="font-display mt-2 text-4xl font-bold uppercase tracking-[0.1em] text-[#e6e6e6] sm:text-5xl">
+            FROM INDIE HORROR PHENOMENON TO THE BIG SCREEN
+          </h2>
+          <div class="mt-4 h-1 w-24 bg-[#d90429]"></div>
+          <p class="mt-6 text-base leading-relaxed text-[#e6e6e6]/80">
+            Created in 2022 by solo indie developer <strong class="text-white">David Szymanski</strong>, <em>Iron Lung</em> redefined psychological dread through pure minimalism. Trapping players inside a single cramped room with no direct visibility, the game transformed simple X/Y coordinate dials, metallic groans, and slow-developing grainy photographs into a viral terror sensation—inspiring Mark Fischbach to bring its suffocating atmosphere to theaters.
+          </p>
+        </div>
+
+        <!-- Two Side-by-Side Game Image Placeholders -->
+        <div class="mt-12 grid grid-cols-1 gap-8 md:grid-cols-2">
+          
+          <!-- Game Placeholder 4 -->
+          <div class="flex flex-col">
+            <div class="sonar-grid media-frame relative flex min-h-[300px] flex-col justify-between rounded-lg border border-[#8a0303]/60 p-6 shadow-xl">
+              <!-- IMAGEN: archivo local. Para cambiarla reemplaza "assets/in_game.jpg" por tu imagen -->
+              <img class="media-img" src="assets/in_game.jpg" alt="Interior of the submarine in the Iron Lung video game" loading="lazy" />
+              <span class="pointer-events-none absolute left-3 top-3 h-4 w-4 border-l-2 border-t-2 border-[#d49a42]"></span>
+              <span class="pointer-events-none absolute right-3 top-3 h-4 w-4 border-r-2 border-t-2 border-[#d49a42]"></span>
+              <span class="pointer-events-none absolute bottom-3 left-3 h-4 w-4 border-b-2 border-l-2 border-[#d49a42]"></span>
+              <span class="pointer-events-none absolute bottom-3 right-3 h-4 w-4 border-b-2 border-r-2 border-[#d49a42]"></span>
+
+              <div class="flex items-center justify-between font-mono-tech text-xs text-[#d49a42]">
+                <span>GAMEPLAY CAPTURE // CONSOLE</span>
+                <span>2022 INDIE RELEASE</span>
+              </div>
+
+
+              <div class="border-t border-white/10 pt-3 font-mono-tech text-[11px] text-[#e6e6e6]/50">
+                <span>NAVIGATION BY COORDINATES &amp; PROXIMITY AUDIO</span>
+              </div>
+            </div>
+            <p class="mt-3 text-sm text-[#e6e6e6]/70">
+              <strong class="text-white">Blind Navigation:</strong> Players steer exclusively by numbers and sonar ticks, never seeing the ocean directly.
+            </p>
+          </div>
+
+          <!-- Game Placeholder 5 -->
+          <div class="flex flex-col">
+            <div class="sonar-grid media-frame relative flex min-h-[300px] flex-col justify-between rounded-lg border border-[#8a0303]/60 p-6 shadow-xl">
+              <!-- IMAGEN: archivo local. Para cambiarla reemplaza "assets/strange_skeleton.jpg" por tu imagen -->
+              <img class="media-img" src="assets/strange_skeleton.jpg" alt="Grainy in-game camera photo of a strange skeleton" loading="lazy" />
+              <span class="pointer-events-none absolute left-3 top-3 h-4 w-4 border-l-2 border-t-2 border-[#d90429]"></span>
+              <span class="pointer-events-none absolute right-3 top-3 h-4 w-4 border-r-2 border-t-2 border-[#d90429]"></span>
+              <span class="pointer-events-none absolute bottom-3 left-3 h-4 w-4 border-b-2 border-l-2 border-[#d90429]"></span>
+              <span class="pointer-events-none absolute bottom-3 right-3 h-4 w-4 border-b-2 border-r-2 border-[#d90429]"></span>
+
+              <div class="flex items-center justify-between font-mono-tech text-xs text-[#d90429]">
+                <span>EXTERNAL CAMERA // CAPTURED PHOTO</span>
+                <span>ANOMALY DETECTED</span>
+              </div>
+
+
+              <div class="border-t border-white/10 pt-3 font-mono-tech text-[11px] text-[#e6e6e6]/50">
+                <span>PHOTOGRAPHIC LOG // AT-5 TRENCH</span>
+              </div>
+            </div>
+            <p class="mt-3 text-sm text-[#e6e6e6]/70">
+              <strong class="text-white">The Camera Mechanic:</strong> Every low-resolution snapshot reveals a terrifying new clue—or confirms you are not alone.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- 6. CAST & FILMMAKERS GRID                                             -->
+    <!-- ===================================================================== -->
+    <section id="cast" class="border-b border-white/10 bg-[#0b0c0f] py-20 lg:py-28">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        
+        <!-- Section Header -->
+        <div class="mb-12">
+          <p class="font-mono-tech text-xs uppercase tracking-[0.25em] text-[#d49a42]">
+            PERSONNEL MANIFEST // CREDITS
+          </p>
+          <h2 class="font-display mt-2 text-4xl font-bold uppercase tracking-[0.12em] text-[#e6e6e6] sm:text-5xl">
+            CAST &amp; FILMMAKERS
+          </h2>
+          <div class="mt-4 h-1 w-24 bg-[#d90429]"></div>
+        </div>
+
+        <!-- 4-Column Static Card Grid -->
+        <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          
+          <!-- Card 1: Mark Fischbach -->
+          <article class="steel-panel flex flex-col rounded-lg border border-white/10 p-4">
+            <div class="sonar-grid media-frame relative flex aspect-[3/4] w-full flex-col justify-between rounded border border-[#d49a42]/40 p-4">
+              <!-- IMAGEN: archivo local. Para cambiarla reemplaza "assets/cast_mark_fischbach.jpg" por tu imagen -->
+              <img class="media-img object-top" src="assets/cast_mark_fischbach.jpg" alt="Mark Fischbach (Markiplier)" loading="lazy" />
+              <span class="pointer-events-none absolute left-2 top-2 h-3 w-3 border-l border-t border-[#d49a42]"></span>
+              <span class="pointer-events-none absolute right-2 top-2 h-3 w-3 border-r border-t border-[#d49a42]"></span>
+              <span class="pointer-events-none absolute bottom-2 left-2 h-3 w-3 border-b border-l border-[#d49a42]"></span>
+              <span class="pointer-events-none absolute bottom-2 right-2 h-3 w-3 border-b border-r border-[#d49a42]"></span>
+
+              <span class="font-mono-tech text-[10px] text-[#d49a42]">ID // 01</span>
+              <span class="font-mono-tech text-right text-[10px] text-[#e6e6e6]/40">DIR / LEAD</span>
+            </div>
+
+            <h3 class="font-display mt-4 text-2xl font-bold uppercase tracking-wider text-white">
+              Mark Fischbach
+            </h3>
+            <p class="font-mono-tech mt-1 text-xs uppercase tracking-wider text-[#d90429]">
+              Writer, Director &amp; Lead Role
+            </p>
+            <p class="mt-3 text-sm leading-relaxed text-[#e6e6e6]/75">
+              Making his feature directorial debut, Fischbach writes, directs, and stars as the doomed convict sealed inside the SM-13 submersible.
+            </p>
+          </article>
+
+          <!-- Card 2: Caroline Rose Kaplan -->
+          <article class="steel-panel flex flex-col rounded-lg border border-white/10 p-4">
+            <div class="sonar-grid media-frame relative flex aspect-[3/4] w-full flex-col justify-between rounded border border-[#d49a42]/40 p-4">
+              <!-- IMAGEN: archivo local. Para cambiarla reemplaza "assets/cast_caroline_kaplan.jpg" por tu imagen -->
+              <img class="media-img object-top" src="assets/cast_caroline_kaplan.jpg" alt="Caroline Rose Kaplan" loading="lazy" />
+              <span class="pointer-events-none absolute left-2 top-2 h-3 w-3 border-l border-t border-[#d49a42]"></span>
+              <span class="pointer-events-none absolute right-2 top-2 h-3 w-3 border-r border-t border-[#d49a42]"></span>
+              <span class="pointer-events-none absolute bottom-2 left-2 h-3 w-3 border-b border-l border-[#d49a42]"></span>
+              <span class="pointer-events-none absolute bottom-2 right-2 h-3 w-3 border-b border-r border-[#d49a42]"></span>
+
+              <span class="font-mono-tech text-[10px] text-[#d49a42]">ID // 02</span>
+              <span class="font-mono-tech text-right text-[10px] text-[#e6e6e6]/40">CAST</span>
+            </div>
+
+            <h3 class="font-display mt-4 text-2xl font-bold uppercase tracking-wider text-white">
+              Caroline Rose Kaplan
+            </h3>
+            <p class="font-mono-tech mt-1 text-xs uppercase tracking-wider text-[#d49a42]">
+              Principal Cast
+            </p>
+            <p class="mt-3 text-sm leading-relaxed text-[#e6e6e6]/75">
+              Known for <em>The Plot Against America</em> and <em>Proof</em>, Kaplan joins the expedition crew in a pivotal dramatic role.
+            </p>
+          </article>
+
+          <!-- Card 3: Troy Baker -->
+          <article class="steel-panel flex flex-col rounded-lg border border-white/10 p-4">
+            <div class="sonar-grid media-frame relative flex aspect-[3/4] w-full flex-col justify-between rounded border border-[#d49a42]/40 p-4">
+              <!-- IMAGEN: archivo local. Para cambiarla reemplaza "assets/cast_troy_baker.jpg" por tu imagen -->
+              <img class="media-img object-top" src="assets/cast_troy_baker.jpg" alt="Troy Baker" loading="lazy" />
+              <span class="pointer-events-none absolute left-2 top-2 h-3 w-3 border-l border-t border-[#d49a42]"></span>
+              <span class="pointer-events-none absolute right-2 top-2 h-3 w-3 border-r border-t border-[#d49a42]"></span>
+              <span class="pointer-events-none absolute bottom-2 left-2 h-3 w-3 border-b border-l border-[#d49a42]"></span>
+              <span class="pointer-events-none absolute bottom-2 right-2 h-3 w-3 border-b border-r border-[#d49a42]"></span>
+
+              <span class="font-mono-tech text-[10px] text-[#d49a42]">ID // 03</span>
+              <span class="font-mono-tech text-right text-[10px] text-[#e6e6e6]/40">CAST</span>
+            </div>
+
+            <h3 class="font-display mt-4 text-2xl font-bold uppercase tracking-wider text-white">
+              Troy Baker
+            </h3>
+            <p class="font-mono-tech mt-1 text-xs uppercase tracking-wider text-[#d49a42]">
+              Principal Cast
+            </p>
+            <p class="mt-3 text-sm leading-relaxed text-[#e6e6e6]/75">
+              Acclaimed performer celebrated for <em>The Last of Us</em> and <em>BioShock Infinite</em> lends his commanding presence to the film.
+            </p>
+          </article>
+
+          <!-- Card 4: David Szymanski -->
+          <article class="steel-panel flex flex-col rounded-lg border border-white/10 p-4">
+            <div class="sonar-grid media-frame relative flex aspect-[3/4] w-full flex-col justify-between rounded border border-[#d49a42]/40 p-4">
+              <!-- IMAGEN: archivo local. Para cambiarla reemplaza "assets/cast_david_szymanski.jpg" por tu imagen -->
+              <img class="media-img object-top" src="assets/cast_david_szymanski.jpg" alt="David Szymanski" loading="lazy" />
+              <span class="pointer-events-none absolute left-2 top-2 h-3 w-3 border-l border-t border-[#d49a42]"></span>
+              <span class="pointer-events-none absolute right-2 top-2 h-3 w-3 border-r border-t border-[#d49a42]"></span>
+              <span class="pointer-events-none absolute bottom-2 left-2 h-3 w-3 border-b border-l border-[#d49a42]"></span>
+              <span class="pointer-events-none absolute bottom-2 right-2 h-3 w-3 border-b border-r border-[#d49a42]"></span>
+
+              <span class="font-mono-tech text-[10px] text-[#d49a42]">ID // 04</span>
+              <span class="font-mono-tech text-right text-[10px] text-[#e6e6e6]/40">CREATOR</span>
+            </div>
+
+            <h3 class="font-display mt-4 text-2xl font-bold uppercase tracking-wider text-white">
+              David Szymanski
+            </h3>
+            <p class="font-mono-tech mt-1 text-xs uppercase tracking-wider text-[#d90429]">
+              Original Game Creator
+            </p>
+            <p class="mt-3 text-sm leading-relaxed text-[#e6e6e6]/75">
+              Creator of <em>DUSK</em> and the original 2022 <em>Iron Lung</em> video game, collaborating closely to preserve the lore and dread of AT-5.
+            </p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- 7. PROMOTIONAL STILLS GALLERY                                         -->
+    <!-- ===================================================================== -->
+    <section id="gallery" class="border-b border-white/10 bg-[#070709] py-20 lg:py-28">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        
+        <!-- Section Header -->
+        <div class="mb-12 flex flex-wrap items-end justify-between gap-4">
+          <div>
+            <p class="font-mono-tech text-xs uppercase tracking-[0.25em] text-[#d49a42]">
+              VISUAL EVIDENCE // PRESS KIT STILLS
+            </p>
+            <h2 class="font-display mt-2 text-4xl font-bold uppercase tracking-[0.12em] text-[#e6e6e6] sm:text-5xl">
+              PROMOTIONAL STILLS GALLERY
+            </h2>
+            <div class="mt-4 h-1 w-24 bg-[#d90429]"></div>
+          </div>
+          <p class="font-mono-tech text-xs uppercase tracking-widest text-[#e6e6e6]/50">
+            6 RECOVERED FRAMES // AT-5 ARCHIVE
+          </p>
+        </div>
+
+        <!-- 3-Column Widescreen Gallery Grid -->
+        <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+          
+          <!-- Still 1 -->
+          <figure class="flex flex-col">
+            <div class="sonar-grid media-frame relative flex aspect-video w-full flex-col justify-between rounded-lg border border-white/15 p-4">
+              <!-- IMAGEN: archivo local. Para cambiarla reemplaza "assets/still_01.jpg" por tu imagen -->
+              <img class="media-img" src="assets/still_01.jpg" alt="Crew preparing Markiplier before the SM-13 is sealed" loading="lazy" />
+              <span class="pointer-events-none absolute left-2.5 top-2.5 h-3 w-3 border-l border-t border-[#d90429]"></span>
+              <span class="pointer-events-none absolute right-2.5 top-2.5 h-3 w-3 border-r border-t border-[#d90429]"></span>
+              <span class="pointer-events-none absolute bottom-2.5 left-2.5 h-3 w-3 border-b border-l border-[#d90429]"></span>
+              <span class="pointer-events-none absolute bottom-2.5 right-2.5 h-3 w-3 border-b border-r border-[#d90429]"></span>
+
+              <span class="font-mono-tech text-[11px] text-[#d49a42]">STILL 01 // 00:14:22</span>
+              <span class="font-mono-tech text-right text-[10px] text-[#e6e6e6]/40">SURFACE DOCK</span>
+            </div>
+            <figcaption class="mt-3">
+              <h3 class="font-display text-lg font-semibold uppercase tracking-wider text-white">
+                The Welding of the Hatch
+              </h3>
+              <p class="mt-1 text-xs leading-relaxed text-[#e6e6e6]/70">
+                There is no turning back once the iron seal is fused shut from the outside.
+              </p>
+            </figcaption>
+          </figure>
+
+          <!-- Still 2 -->
+          <figure class="flex flex-col">
+            <div class="sonar-grid media-frame relative flex aspect-video w-full flex-col justify-between rounded-lg border border-white/15 p-4">
+              <!-- IMAGEN: archivo local. Para cambiarla reemplaza "assets/still_02.jpg" por tu imagen -->
+              <img class="media-img" src="assets/still_02.jpg" alt="Blood pouring in crimson light" loading="lazy" />
+              <span class="pointer-events-none absolute left-2.5 top-2.5 h-3 w-3 border-l border-t border-[#d90429]"></span>
+              <span class="pointer-events-none absolute right-2.5 top-2.5 h-3 w-3 border-r border-t border-[#d90429]"></span>
+              <span class="pointer-events-none absolute bottom-2.5 left-2.5 h-3 w-3 border-b border-l border-[#d90429]"></span>
+              <span class="pointer-events-none absolute bottom-2.5 right-2.5 h-3 w-3 border-b border-r border-[#d90429]"></span>
+
+              <span class="font-mono-tech text-[11px] text-[#d49a42]">STILL 02 // 00:31:09</span>
+              <span class="font-mono-tech text-right text-[10px] text-[#e6e6e6]/40">DEPTH: -50M</span>
+            </div>
+            <figcaption class="mt-3">
+              <h3 class="font-display text-lg font-semibold uppercase tracking-wider text-white">
+                Submersion Into Crimson
+              </h3>
+              <p class="mt-1 text-xs leading-relaxed text-[#e6e6e6]/70">
+                Descending beneath an opaque ocean of blood where sunlight has never existed.
+              </p>
+            </figcaption>
+          </figure>
+
+          <!-- Still 3 -->
+          <figure class="flex flex-col">
+            <div class="sonar-grid media-frame relative flex aspect-video w-full flex-col justify-between rounded-lg border border-white/15 p-4">
+              <!-- IMAGEN: archivo local. Para cambiarla reemplaza "assets/still_03.jpg" por tu imagen -->
+              <img class="media-img" src="assets/still_03.jpg" alt="Markiplier bathed in red alarm light" loading="lazy" />
+              <span class="pointer-events-none absolute left-2.5 top-2.5 h-3 w-3 border-l border-t border-[#d90429]"></span>
+              <span class="pointer-events-none absolute right-2.5 top-2.5 h-3 w-3 border-r border-t border-[#d90429]"></span>
+              <span class="pointer-events-none absolute bottom-2.5 left-2.5 h-3 w-3 border-b border-l border-[#d90429]"></span>
+              <span class="pointer-events-none absolute bottom-2.5 right-2.5 h-3 w-3 border-b border-r border-[#d90429]"></span>
+
+              <span class="font-mono-tech text-[11px] text-[#d90429]">STILL 03 // 00:48:55</span>
+              <span class="font-mono-tech text-right text-[10px] text-[#e6e6e6]/40">PROXIMITY ALERT</span>
+            </div>
+            <figcaption class="mt-3">
+              <h3 class="font-display text-lg font-semibold uppercase tracking-wider text-white">
+                First Sonar Contact
+              </h3>
+              <p class="mt-1 text-xs leading-relaxed text-[#e6e6e6]/70">
+                The proximity alarm triggers—signaling an unidentified mass circling the hull.
+              </p>
+            </figcaption>
+          </figure>
+
+          <!-- Still 4 -->
+          <figure class="flex flex-col">
+            <div class="sonar-grid media-frame relative flex aspect-video w-full flex-col justify-between rounded-lg border border-white/15 p-4">
+              <!-- IMAGEN: archivo local. Para cambiarla reemplaza "assets/still_04.jpg" por tu imagen -->
+              <img class="media-img" src="assets/still_04.jpg" alt="Pressure gauges on the submarine wall" loading="lazy" />
+              <span class="pointer-events-none absolute left-2.5 top-2.5 h-3 w-3 border-l border-t border-[#d49a42]"></span>
+              <span class="pointer-events-none absolute right-2.5 top-2.5 h-3 w-3 border-r border-t border-[#d49a42]"></span>
+              <span class="pointer-events-none absolute bottom-2.5 left-2.5 h-3 w-3 border-b border-l border-[#d49a42]"></span>
+              <span class="pointer-events-none absolute bottom-2.5 right-2.5 h-3 w-3 border-b border-r border-[#d49a42]"></span>
+
+              <span class="font-mono-tech text-[11px] text-[#d49a42]">STILL 04 // 01:05:17</span>
+              <span class="font-mono-tech text-right text-[10px] text-[#e6e6e6]/40">HULL BREACH</span>
+            </div>
+            <figcaption class="mt-3">
+              <h3 class="font-display text-lg font-semibold uppercase tracking-wider text-white">
+                Crushing Depth
+              </h3>
+              <p class="mt-1 text-xs leading-relaxed text-[#e6e6e6]/70">
+                As pressure mounts, corroded iron rivets begin to buckle under the weight of the ocean.
+              </p>
+            </figcaption>
+          </figure>
+
+          <!-- Still 5 -->
+          <figure class="flex flex-col">
+            <div class="sonar-grid media-frame relative flex aspect-video w-full flex-col justify-between rounded-lg border border-white/15 p-4">
+              <!-- IMAGEN: archivo local. Para cambiarla reemplaza "assets/still_05.jpg" por tu imagen -->
+              <img class="media-img" src="assets/still_05.jpg" alt="Grainy camera photo of a skeletal structure" loading="lazy" />
+              <span class="pointer-events-none absolute left-2.5 top-2.5 h-3 w-3 border-l border-t border-[#d49a42]"></span>
+              <span class="pointer-events-none absolute right-2.5 top-2.5 h-3 w-3 border-r border-t border-[#d49a42]"></span>
+              <span class="pointer-events-none absolute bottom-2.5 left-2.5 h-3 w-3 border-b border-l border-[#d49a42]"></span>
+              <span class="pointer-events-none absolute bottom-2.5 right-2.5 h-3 w-3 border-b border-r border-[#d49a42]"></span>
+
+              <span class="font-mono-tech text-[11px] text-[#d49a42]">STILL 05 // 01:22:40</span>
+              <span class="font-mono-tech text-right text-[10px] text-[#e6e6e6]/40">SECTOR X-84</span>
+            </div>
+            <figcaption class="mt-3">
+              <h3 class="font-display text-lg font-semibold uppercase tracking-wider text-white">
+                The Blood Trench
+              </h3>
+              <p class="mt-1 text-xs leading-relaxed text-[#e6e6e6]/70">
+                An impossible ruin emerges on the camera monitor deep within the abyssal canyon.
+              </p>
+            </figcaption>
+          </figure>
+
+          <!-- Still 6 -->
+          <figure class="flex flex-col">
+            <div class="sonar-grid media-frame relative flex aspect-video w-full flex-col justify-between rounded-lg border border-white/15 p-4">
+              <!-- IMAGEN: archivo local. Para cambiarla reemplaza "assets/still_06.jpg" por tu imagen -->
+              <img class="media-img" src="assets/still_06.jpg" alt="Silhouette in the red-lit flooded cockpit" loading="lazy" />
+              <span class="pointer-events-none absolute left-2.5 top-2.5 h-3 w-3 border-l border-t border-[#d90429]"></span>
+              <span class="pointer-events-none absolute right-2.5 top-2.5 h-3 w-3 border-r border-t border-[#d90429]"></span>
+              <span class="pointer-events-none absolute bottom-2.5 left-2.5 h-3 w-3 border-b border-l border-[#d90429]"></span>
+              <span class="pointer-events-none absolute bottom-2.5 right-2.5 h-3 w-3 border-b border-r border-[#d90429]"></span>
+
+              <span class="font-mono-tech text-[11px] text-[#d90429]">STILL 06 // 01:39:03</span>
+              <span class="font-mono-tech text-right text-[10px] text-[#e6e6e6]/40">SIGNAL LOST</span>
+            </div>
+            <figcaption class="mt-3">
+              <h3 class="font-display text-lg font-semibold uppercase tracking-wider text-white">
+                No Escape
+              </h3>
+              <p class="mt-1 text-xs leading-relaxed text-[#e6e6e6]/70">
+                In the final transmission from AT-5, survival gives way to pure cosmic terror.
+              </p>
+            </figcaption>
+          </figure>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===================================================================== -->
+  <!-- 8. THEATRICAL BILLING BLOCK & FOOTER                                  -->
+  <!-- ===================================================================== -->
+  <footer class="bg-[#050507] py-16 text-[#e6e6e6]/70">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      
+      <!-- Hollywood-Style Condensed Credit Billing Block -->
+      <div class="billing-block border-y border-white/15 py-8 text-center text-[11px] text-[#e6e6e6]/60 sm:text-xs">
+        <p>
+          <span class="text-[9px] text-[#e6e6e6]/40">MARKIPLIER STUDIOS PRESENTS</span>
+          A <span class="font-semibold text-[#e6e6e6]">MARK FISCHBACH</span> FILM
+          <span class="font-bold text-[#e6e6e6]">&ldquo;IRON LUNG&rdquo;</span>
+          STARRING <span class="font-semibold text-[#e6e6e6]">MARK FISCHBACH</span>
+          <span class="font-semibold text-[#e6e6e6]">CAROLINE ROSE KAPLAN</span>
+          AND <span class="font-semibold text-[#e6e6e6]">TROY BAKER</span>
+        </p>
+        <p class="mt-1.5">
+          <span class="text-[9px] text-[#e6e6e6]/40">MUSIC BY</span> <span class="text-[#e6e6e6]">ANDREW HULSHULT</span>
+          <span class="text-[9px] text-[#e6e6e6]/40">DIRECTOR OF PHOTOGRAPHY</span> <span class="text-[#e6e6e6]">PHILIP ROY</span>
+          <span class="text-[9px] text-[#e6e6e6]/40">PRODUCTION DESIGNER</span> <span class="text-[#e6e6e6]">CONSOLIDATION ART DEPT</span>
+          <span class="text-[9px] text-[#e6e6e6]/40">EDITED BY</span> <span class="text-[#e6e6e6]">MARK FISCHBACH</span>
+        </p>
+        <p class="mt-1.5">
+          <span class="text-[9px] text-[#e6e6e6]/40">BASED ON THE VIDEO GAME &ldquo;IRON LUNG&rdquo; CREATED BY</span>
+          <span class="font-semibold text-[#e6e6e6]">DAVID SZYMANSKI</span>
+          <span class="text-[9px] text-[#e6e6e6]/40">WRITTEN, PRODUCED, AND DIRECTED BY</span>
+          <span class="font-semibold text-[#e6e6e6]">MARK FISCHBACH</span>
+        </p>
+      </div>
+
+      <!-- MPAA-Style Rating Box & Theatrical Tag -->
+      <div class="mt-10 flex flex-col items-center justify-center gap-6 sm:flex-row">
+        
+        <!-- Stylized R-Rating Box -->
+        <div class="flex items-stretch border-2 border-[#e6e6e6]/80 bg-[#070709] text-[#e6e6e6]">
+          <div class="flex items-center justify-center border-r-2 border-[#e6e6e6]/80 px-4 py-1.5">
+            <span class="font-display text-3xl font-bold leading-none">R</span>
+          </div>
+          <div class="flex flex-col justify-center px-3 py-1.5 text-left">
+            <span class="font-display text-[10px] font-bold tracking-wider text-white">
+              RESTRICTED
+            </span>
+            <span class="font-mono-tech text-[10px] leading-tight text-[#e6e6e6]/85">
+              FOR BLOODY HORROR AND INTENSE PERIL
+            </span>
+          </div>
+        </div>
+
+        <div class="text-center sm:text-left">
+          <p class="font-display text-lg font-semibold uppercase tracking-[0.2em] text-[#d90429]">
+            EXPERIENCE IT IN THEATERS
+          </p>
+          <p class="font-mono-tech text-xs text-[#e6e6e6]/50">
+            CONSOLIDATION OF IRON // EXPEDITION AT-5
+          </p>
+        </div>
+      </div>
+
+      <!-- Static Footer Links & Copyright -->
+      <div class="mt-10 flex flex-wrap items-center justify-center gap-6 border-t border-white/10 pt-8 font-mono-tech text-xs tracking-wider text-[#e6e6e6]/50">
+        <a href="#top" class="transition-colors hover:text-[#d49a42]">BACK TO TOP</a>
+        <span>&bull;</span>
+        <a href="#story" class="transition-colors hover:text-[#d49a42]">OFFICIAL SYNOPSIS</a>
+        <span>&bull;</span>
+        <a href="#submarine" class="transition-colors hover:text-[#d49a42]">SM-13 SPECIFICATIONS</a>
+        <span>&bull;</span>
+        <a href="#game" class="transition-colors hover:text-[#d49a42]">ORIGINAL GAME</a>
+        <span>&bull;</span>
+        <a href="#cast" class="transition-colors hover:text-[#d49a42]">PRESS CREDITS</a>
+      </div>
+
+      <p class="mt-6 text-center font-mono-tech text-[11px] text-[#e6e6e6]/35">
+        &copy; IRON LUNG MOTION PICTURE PROMOTIONAL SHOWCASE. ALL RIGHTS RESERVED.
+      </p>
+    </div>
+  </footer>
+
+</body>
+</html>
